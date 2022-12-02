@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lambda04 {
@@ -25,6 +22,9 @@ fields --> Universite (String)
           System.out.println(f1(unv));
           System.out.println(f2(unv));
           System.out.println(f3(unv));
+          System.out.println(f4(unv));
+          System.out.println(f5(unv));
+          System.out.println(f6(unv));
 
       }
     //task 01--> Universitelerin hepsinin notOrt'larinin 74' den buyuk olup olmadigini kontrol eden pr create ediniz.
@@ -40,4 +40,22 @@ fields --> Universite (String)
     public static List<Universite> f3(List<Universite> list){
           return list.stream().sorted(Comparator.comparing(Universite::getOgrSayisi).reversed()).collect(Collectors.toList());
     }
+    //task 04-->"matematik" bolumlerinin sayisini  print ediniz.
+    public static int f4(List<Universite> list){
+        return (int)  list.stream().filter(t->t.getBolum().equalsIgnoreCase("matematik")).count();
+           //return (int) list.stream().filter(t->t.getBolum().contains("mat")).count();
+        // return list.stream().filter(t->t.getBolum().contains("mat")).collect(Collectors.toList()).size();
+    }
+    //task 05-->Ogrenci sayilari 550'dan fazla olan universite'lerin en buyuk notOrt'unu bulunuz.
+    public static int f5(List<Universite> list){
+         //return list.stream().filter(t->t.getOgrSayisi()>550).map(t->t.getNotOrt()).reduce(Integer.MIN_VALUE,Integer::max);
+        return list.stream().filter(t->t.getOgrSayisi()>550).map(t->t.getNotOrt()).reduce(Integer::max).get().intValue();
+        // return list.stream().filter(t->t.getOgrSayisi()>550).mapToInt(t->t.getNotOrt()).max(); // OptionalInt
+    }
+    //task 06-->Ogrenci sayilari 1050'dan az olan universite'lerin en kucuk notOrt'unu bulunuz
+    public static int f6(List<Universite> list){
+         return list.stream().filter(t->t.getOgrSayisi()<1050).map(t->t.getNotOrt()).reduce(Integer::min).get().intValue();
+         //return list.stream().filter(t->t.getOgrSayisi()<1050).map(t->t.getNotOrt()).mapToInt(t->t.getNotOrt()).max();
+    }
+
 }
