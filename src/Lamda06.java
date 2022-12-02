@@ -17,14 +17,26 @@ public class Lamda06 {
         list.add("keciboynuzu");
         list.add("Ayva");
 
+        //S4 : icinde e olanlardan yeni bir list olusturunuz
+        System.out.println(list.stream().filter(t -> t.contains("e")).collect(Collectors.toList()));
+
+        //S6: List elemanarını 2.harfe gore sıralayıp
+        //ilk 5 elemandan char sayısı en buyuk elemanı print
+        list.stream().sorted(Comparator.comparing(t->t.charAt(1))).limit(5).
+                sorted(Comparator.comparing(String::length).reversed()).limit(1).forEach(Lambda01::yazdir);
+        System.out.println();
         //S7: uzunlugu 3 ile 7 arası olan veya a ile biten elemanlardan yeni bir liste olustur
         System.out.println(list.stream().filter(t -> t.length() > 3 && t.length() < 7).collect(Collectors.toList()));
+
 
         //S8:list elemanlarını uzunluklarına ve ikinci harflerine göre benzersiz sıralayıp yazdırın
         System.out.println(list.stream().sorted(Comparator.comparing(String::length).thenComparing(t->t.charAt(1)))
                 .distinct().collect(Collectors.toList()));
-        System.out.println(list.stream().sorted(Comparator.comparing(String::length)).sorted(Comparator.comparing(t -> t.charAt(1)))
-                .distinct().collect(Collectors.toList()));
+
+
+        //System.out.println(list.stream().sorted(Comparator.comparing(String::length)).sorted(Comparator.comparing(t -> t.charAt(1)))
+            //    .distinct().collect(Collectors.toList()));
+
 
         //S9: uzunlugu 4 ve 8 olanlar haric bir liste olusturunuz
         System.out.println(list.stream().filter(t -> t.length() != 4 && t.length() != 8).collect(Collectors.toList()));
